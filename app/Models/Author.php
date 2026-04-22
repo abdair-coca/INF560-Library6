@@ -27,4 +27,11 @@ class Author extends Model
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Book::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 }

@@ -26,5 +26,10 @@ class Category extends Model
                 $category->slug = Str::slug($category->name);
             }
         });
-    } 
+    }
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Book::class);
+    }
 }

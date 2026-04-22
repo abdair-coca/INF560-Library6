@@ -39,12 +39,12 @@ class Book extends Model
 
     public function decrementCopies(): bool
     {
-        if($this->available_copies <= 0){
+        if ($this->available_copies <= 0) {
             return false;
         }
         $this->decrement('available_copies');
         $this->refresh();
-        if($this->available_copies === 0) {
+        if ($this->available_copies === 0) {
             $this->update(['status' => 'unavailable']);
         }
         return true;
@@ -52,12 +52,34 @@ class Book extends Model
 
     public function incrementCopies(): void
     {
-        if($this->available_copies < $this->total_copies) {
+        if ($this->available_copies < $this->total_copies) {
             $this->increment('available_copies');
             $this->refresh();
-            if($this->status !== 'available') {
+            if ($this->status !== 'available') {
                 $this->update(['status' => 'available']);
             }
         }
+    }
+
+    public function authors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Author::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function loans(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
+    
+    public function activeLoans(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Loan::class)->where('status', 'active');
     }
 }
