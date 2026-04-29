@@ -48,7 +48,7 @@ class Member extends Model
     {
         return $this->is_active
             && ($this->membership_expires_at === null
-                || $this->membership_expires_at->gte(now()));
+                || $this->membership_expires_at->isFuture());
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -32,7 +32,7 @@ class Book extends Model
         'available_copies' => 'integer'
     ];
 
-    public function getIsAvailableAtrribute(): bool
+    public function getIsAvailableAttribute(): bool
     {
         return $this->available_copies > 0;
     }

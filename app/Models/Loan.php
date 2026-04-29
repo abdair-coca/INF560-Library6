@@ -29,12 +29,13 @@ class Loan extends Model
     public function getIsOverdueAttribute(): bool
     {
         return $this->returned_date === null
+            && $this->due_date !== null
             && $this->due_date->lt(now());
     }
 
     public function getDaysRemainingAttribute(): int
     {
-        if ($this->returned_date !== null) {
+        if ($this->returned_date !== null || $this->due_date === null) {
             return 0;
         }
 
