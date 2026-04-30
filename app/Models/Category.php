@@ -21,7 +21,7 @@ class Category extends Model
     {
         parent::boot();
 
-        static::creating (function(Category $category) {
+        static::creating(function (Category $category) {
             if (empty($category->slug)) {
                 $category->slug = Str::slug($category->name);
             }
@@ -31,5 +31,9 @@ class Category extends Model
     public function books(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Book::class);
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
