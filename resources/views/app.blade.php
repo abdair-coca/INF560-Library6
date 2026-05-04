@@ -11,6 +11,7 @@
         <div class="container mx-auto flex gap-4">
             <a href="{{ route('books.index') }}" class="font-bold hover:text-blue-200">Libros</a>
             <a href="{{ route('authors.index') }}" class="font-bold hover:text-blue-200">Autores</a>
+            <a href="{{ route('categories.index') }}" class="font-bold hover:text-blue-200">Categorias</a>
         </div>
     </nav>
 

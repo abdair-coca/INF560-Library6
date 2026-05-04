@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('books')->orderBy('name')->paginate(20);
         return view('category.index', compact('categories'));
     }
 
