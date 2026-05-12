@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidIsbn13;
 
 class UpdateBookRequest extends FormRequest
 {
@@ -15,9 +16,13 @@ class UpdateBookRequest extends FormRequest
         // Al actualizar, ignoramos el ISBN del propio libro en la regla unique
         return [
             'title' => 'required|string|max:255',
-            'isbn' => 'nullable|string|max:20|unique:books,isbn,' . $this->book->id,
+            'isbn' => [
+                'nullable',
+                'unique:books,isbn,' . $this->book->id,
+                new ValidIsbn13,
+            ],
             'publisher' => 'nullable|string|max:150',
-            'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),
+            'publish_year' => 'nullable|integer|min:1000|max:' . date('Y'),
             'pages' => 'nullable|integer|min:1',
             'language' => 'nullable|string|max:50',
             'description' => 'nullable|string',

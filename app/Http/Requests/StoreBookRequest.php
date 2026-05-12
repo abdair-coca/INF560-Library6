@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidIsbn13;
 
 class StoreBookRequest extends FormRequest
 {
@@ -14,9 +15,13 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'isbn' => 'nullable|string|max:20|unique:books,isbn',
+            'isbn' => [
+                'nullable',
+                'unique:books,isbn',
+                new ValidIsbn13,
+            ],
             'publisher' => 'nullable|string|max:150',
-            'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),
+            'publish_year' => 'nullable|integer|min:1000|max:' . date('Y'),
             'pages' => 'nullable|integer|min:1',
             'language' => 'nullable|string|max:50',
             'description' => 'nullable|string',

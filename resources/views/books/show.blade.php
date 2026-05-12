@@ -47,7 +47,7 @@ items-center
             <dt class="text-slate-500">Editorial</dt>
             <dd>{{ $book->publisher ?? '—' }}</dd>
             <dt class="text-slate-500">Año de publicación</dt>
-            <dd>{{ $book->publication_year ?? '—' }}</dd>
+            <dd>{{ $book->publish_year ?? '—' }}</dd>
             <dt class="text-slate-500">Páginas</dt>
             <dd>{{ $book->pages ?? '—' }}</dd>
             <dt class="text-slate-500">Idioma</dt>
@@ -75,15 +75,32 @@ items-center
                 class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded text-sm">
                 Editar libro
             </a>
-            <form action="{{ route('books.destroy', $book) }}" method="POST">
+            <form id="delete-book-form"
+                action="{{ route('books.destroy', $book) }}"
+                method="POST">
+
                 @csrf
                 @method('DELETE')
-                <button type="submit"
-                    class="border border-red-300 text-red-600 hover:bg-red-50 px-4 py-2 rounded text-sm"
-                    onclick="return confirm('¿Eliminar este libro?')">
-                    Eliminar
-                </button>
             </form>
+            <button type="button"
+                onclick="openModal('delete-book-form', 'delete-book-modal')"
+                class="bg-red-600 text-white hover:bg-red-800 text-sm rounded px-2">
+
+                Eliminar libro
+            </button>
+            <x-confirm-modal
+                id="delete-book-modal"
+                title="Eliminar libro"
+                message="Esta acción no se puede deshacer.">
+
+                <button type="button"
+                    onclick="confirmAction('delete-book-modal')"
+                    class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
+
+                    Confirmar
+                </button>
+
+            </x-confirm-modal>
         </div>
 
         {{-- ===== Préstamos activos ===== --}}

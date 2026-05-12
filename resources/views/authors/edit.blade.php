@@ -22,12 +22,25 @@
                 class="ml-auto">
                 @csrf
                 @method('DELETE')
-                <button type="submit"
-                    class="text-red-600 hover:text-red-800 text-sm"
-                    onclick="return confirm('¿Eliminar este autor?')">
-                    Eliminar autor
-                </button>
             </form>
+            <button type="submit"
+                class="bg-red-600 text-white hover:bg-red-800 rounded px-2 py-2"
+                onclick="openModal('delete-author-form', 'delete-author-modal')">
+                Eliminar autor
+            </button>
+            <x-confirm-modal
+                id="delete-author-modal"
+                title="Eliminar autor"
+                message="Esta acción no se puede deshacer.">
+
+                <button type="button"
+                    onclick="confirmAction('delete-auhtor-modal')"
+                    class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
+
+                    Confirmar
+                </button>
+
+            </x-confirm-modal>
             @endif
         </div>
     </form>

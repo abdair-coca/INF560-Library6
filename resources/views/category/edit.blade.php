@@ -1,49 +1,44 @@
 @extends('layouts.app')
-@section('title', 'Editar: ' . $book->title)
+@section('title', 'Editar: ' . $category->name)
 @section('content')
 <div class="max-w-3xl mx-auto">
     <h1 class="text-2xl font-bold text-slate-900 mb-6">
-        Editar: {{ $book->title }}
+        Editar: {{ $category->name }}
     </h1>
-    <form action="{{ route('books.update', $book) }}" method="POST"
+    <form action="{{ route('categories.update', $category) }}" method="POST"
         class="bg-white rounded shadow-sm p-6 space-y-4">
         @csrf
         @method('PUT')
-        @include('books._form', ['selectedAuthors' => $selectedAuthors])
+        @include('category._form')
         <div class="flex gap-3 pt-2">
             <button type="submit"
                 class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2 rounded">
-                Actualizar libro
+                Actualizar Categoria
             </button>
-            <a href="{{ route('books.show', $book) }}"
-                class="text-slate-600 hover:text-slate-900 px-4 py-2">
+            <a href="{{ route('categories.show', $category) }}"
+                class="bg-gray-200 text-black rounded hover:bg-slate-300 px-4 py-2">
                 Cancelar
             </a>
         </div>
     </form>
 
     {{-- Eliminar --}}
-    <form id="delete-book-form"
-        action="{{ route('books.destroy', $book) }}"
-        method="POST"
-        class="mt-4">
-
+    <form action="{{ route('categories.destroy', $category) }}" method="POST" class="mt-4">
         @csrf
         @method('DELETE')
     </form>
-    <button type="button"
-        onclick="openModal('delete-book-form', 'delete-book-modal')"
-        class="bg-red-600 text-white hover:bg-red-800 text-sm rounded px-2">
-
-        Eliminar libro
+    <button type="submit"
+        class="bg-red-600 text-white hover:bg-red-800 rounded px-2 py-2"
+        onclick="openModal('delete-category-form', 'delete-category-modal')">
+        Eliminar Categoria
     </button>
     <x-confirm-modal
-        id="delete-book-modal"
-        title="Eliminar libro"
+        id="delete-category-modal"
+        title="Eliminar categoria"
         message="Esta acción no se puede deshacer.">
 
         <button type="button"
-            onclick="confirmAction('delete-book-modal')"
+            onclick="confirmAction('delete-categoria-modal')"
             class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
 
             Confirmar

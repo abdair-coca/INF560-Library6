@@ -26,8 +26,8 @@
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Año de
             publicación</label>
-        <input type="number" name="publication_year"
-            value="{{ old('publication_year', $book->publication_year ?? '') }}"
+        <input type="number" name="publish_year"
+            value="{{ old('publish_year', $book->publish_year ?? '') }}"
             class="w-full border border-slate-300 rounded px-3 py-2">
     </div>
 </div>
@@ -64,8 +64,7 @@
         <option value="">Selecciona una categoría...</option>
         @foreach($categories as $cat)
         <option value="{{ $cat->id }}"
-            {{ old('category_id', $book->category_id ?? '') == $cat->id ? 'selected'
-: '' }}>
+            {{ old('category_id', $book->category_id ?? '') == $cat->id ? 'selected' : '' }}>
             {{ $cat->name }}
         </option>
         @endforeach
@@ -78,22 +77,19 @@
     <label class="block text-sm font-medium text-slate-700 mb-1">
         Autores <span class="text-red-500">*</span>
     </label>
-    <select name="authors[]" multiple
-        class="w-full border @error('authors') border-red-400 @else border-slate-300
-@enderror
- rounded px-3 py-2 h-36">
-        @foreach($authors as $author)
-        @php
-        $selectedIds = old('authors', $selectedAuthors ?? []);
-        @endphp
-        <option value="{{ $author->id }}"
-            {{ in_array($author->id, $selectedIds) ? 'selected' : '' }}>
-            {{ $author->full_name }}
-        </option>
-        @endforeach
-    </select>
-    <p class="text-xs text-slate-500 mt-1">Mantén Ctrl (o Cmd en Mac) para seleccionar
-        varios.</p>
+    @php
+    $selectedIds = old('authors', $selectedAuthors ?? []);
+    @endphp
+    @foreach($authors as $author)
+    <label class="flex items-center gap-2">
+        <input
+            type="checkbox"
+            name="authors[]"
+            value="{{ $author->id }}"
+            {{ is_array($selectedIds) && in_array($author->id, $selectedIds) ? 'checked' : '' }}>
+        <span>{{ $author->full_name }}</span>
+    </label>
+    @endforeach
     @error('authors') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
 </div>
 {{-- Campo: Total de copias --}}

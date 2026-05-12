@@ -16,6 +16,8 @@
                 class="hover:text-amber-300 transition">Catálogo</a>
             <a href="{{ route('authors.index') }}"
                 class="hover:text-amber-300 transition">Autores</a>
+            <a href="{{ route('categories.index') }}"
+                class="hover:text-amber-300 transition">Categorias</a>
             <a href="{{ route('books.trashed') }}"
                 class="hover:text-amber-300 transition text-slate-400 text-sm">
                 Eliminados
@@ -27,6 +29,10 @@
             <a href="{{ route('authors.create') }}"
                 class="border border-slate-500 hover:border-white px-3 py-1 rounded text-sm">
                 + Autor
+            </a>
+            <a href="{{ route('categories.create') }}"
+                class="border border-slate-500 hover:border-white px-3 py-1 rounded text-sm">
+                + Categoria
             </a>
         </div>
     </nav>
@@ -42,5 +48,31 @@
         @yield('content')
     </main>
 </body>
+<script>
+    let currentForm = null;
 
+    function openModal(formId, modalId) {
+        currentForm = document.getElementById(formId);
+
+        const modal = document.getElementById(modalId);
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+
+        modal.classList.add('hidden');
+
+        currentForm = null;
+    }
+
+    function confirmAction(modalId) {
+        if (currentForm) {
+            currentForm.submit();
+        }
+
+        closeModal(modalId);
+    }
+</script>
 </html>
