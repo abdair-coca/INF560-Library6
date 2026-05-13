@@ -1,4 +1,3 @@
-
 <div>
     <label class="block text-sm font-medium text-slate-700 mb-1">
         Título <span class="text-red-500">*</span>
@@ -23,7 +22,13 @@
 {{-- Campo color --}}
 <div>
     <label class="block text-sm font-medium text-slate-700 mb-1">Color</label>
-    <input type="color" name="color"
+    <input type="text" name="color"
         value="{{ old('color', $category->color ?? '#3B82F6') }}"
-        class="w-full h-10 border border-slate-300 rounded px-1 py-1">
+        class="w-full h-10 border border-slate-300 rounded px-1 py-1
+        @error('color') border-red-400 bg-red-50 @else border-slate-300 @enderror
+                  focus:outline-none focus:ring-2 focus:ring-amber-500"
+        maxLength="7">
+    @error('color')
+    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
 </div>

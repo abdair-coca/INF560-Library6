@@ -5,24 +5,50 @@
     <label class="block text-sm font-medium text-slate-700 mb-1">
         Título <span class="text-red-500">*</span>
     </label>
-    <input type="text" name="title"
+
+    <input type="text"
+        name="title"
         value="{{ old('title', $book->title ?? '') }}"
-        class="w-full border @error('title') border-red-400 @else border-slate-300
-@enderror
- rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        placeholder="Ej. Cien años de soledad"
+        maxlength="255"
+        class="w-full rounded px-3 py-2 border
+                  @error('title') border-red-400 bg-red-50 @else border-slate-300 @enderror
+                  focus:outline-none focus:ring-2
+                  @error('title') focus:ring-red-400 @else focus:ring-amber-500 @enderror">
+
     @error('title')
-    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    <p class="mt-1 text-xs text-red-600 flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        {{ $message }}
+    </p>
     @enderror
 </div>
+
 {{-- Campos: ISBN y Año --}}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">ISBN</label>
-        <input type="text" name="isbn"
+        <label class="block text-sm font-medium text-slate-700 mb-1">ISBN-13</label>
+
+        <input type="text"
+            name="isbn"
             value="{{ old('isbn', $book->isbn ?? '') }}"
-            class="w-full border border-slate-300 rounded px-3 py-2">
-        @error('isbn') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            placeholder="Ej. 9780306406157"
+            maxlength="13"
+            class="w-full rounded px-3 py-2 font-mono border
+                  @error('isbn') border-red-400 bg-red-50 @else border-slate-300 @enderror
+                  focus:outline-none focus:ring-2 focus:ring-amber-500">
+
+        <p class="text-xs text-slate-500 mt-1">
+            13 dígitos sin guiones. Déjalo vacío si el libro no tiene ISBN.
+        </p>
+
+        @error('isbn')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
     </div>
+
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Año de
             publicación</label>

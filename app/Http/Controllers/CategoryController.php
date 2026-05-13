@@ -32,10 +32,14 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $data = $request->validated();
-        $category = Category::create($data);
-        return redirect()->route('categories.show', $category)->with('success', "Categoria \"{$category->name}\" creado correctamente.");
+        // validated() ya trae el slug generado por prepareForValidation
+        $category = Category::create($request->validated());
+
+        return redirect()
+            ->route('categories.show', $category)
+            ->with('success', "Categoría \"{ $category->name }\" creada correctamente.");
     }
+
 
     /**
      * Display the specified resource.
@@ -71,13 +75,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->books()->exists())
-            {
-              return back()->with(
+        if ($category->books()->exists()) {
+            return back()->with(
                 'error',
                 "No se puede eliminar \"{$category->name}\": tiene libros asociados."
-            );  
-            }
+            );
+        }
         $category->delete();
         return redirect()
             ->route('categories.index')

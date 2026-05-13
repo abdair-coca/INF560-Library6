@@ -2,36 +2,49 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+use App\Rules\ValidSlug;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize(): bool { return true; }
+
+    protected function prepareForValidation(): void
     {
-        return true;
+        // Normaliza el color a mayúsculas: #dc2626 → #DC2626
+        if ($this->color) {
+            $this->merge([
+                'color' => strtoupper(trim($this->color)),
+            ]);
+        }
+
+        // Genera el slug a partir del nombre si no se proporcionó
+        if ($this->name && ! $this->slug) {
+            $this->merge([
+                'slug' => \Illuminate\Support\Str::slug($this->name),
+            ]);
+        }
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100',
-            'color' => 'nullable|regex:/^#[0-9A-Fa-f]{6}$/',
-            'description' => 'nullable|string',
+            'name'        => ['required', 'string', 'max:100',
+                              Rule::unique('categories', 'name')],
+            'color'       => ['nullable', 'regex:/^#[0-9A-F]{6}$/'],
+            'slug'        => ['nullable', new ValidSlug],
+            'description' => ['nullable', 'string', 'max:500'],
         ];
     }
+
     public function messages(): array
     {
         return [
-            'color.regex' => 'El color debe tener un formato hexadecimal válido (#RRGGBB).',
+            'name.required' => 'El nombre de la categoría es obligatorio.',
+            'name.max'      => 'El nombre no puede superar los 100 caracteres.',
+            'name.unique'   => 'Ya existe una categoría con ese nombre.',
+            'color.regex'   => 'El color debe ser un código hexadecimal válido (ej. #DC2626).',
         ];
     }
 }

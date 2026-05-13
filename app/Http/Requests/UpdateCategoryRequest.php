@@ -2,30 +2,41 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+use App\Rules\ValidSlug;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize(): bool { return true; }
+
+    protected function prepareForValidation(): void
     {
-        return true;
+        if ($this->color) {
+            $this->merge(['color' => strtoupper(trim($this->color))]);
+        }
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        $categoryId = $this->route('category')->id;
+
         return [
-            'name' => 'required|string|max:100', 
-            'color' => 'nullable|regex:/^#[0-9A-Fa-f]{6}$/', 
-            'description' => 'nullable|string',
+            'name'        => ['required', 'string', 'max:100',
+                              Rule::unique('categories', 'name')->ignore($categoryId)],
+            'color'       => ['nullable', 'regex:/^#[0-9A-F]{6}$/'],
+            'slug'        => ['nullable',
+                              new ValidSlug($categoryId)],
+            'description' => ['nullable', 'string', 'max:500'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre de la categoría es obligatorio.',
+            'name.unique'   => 'Ya existe una categoría con ese nombre.',
+            'color.regex'   => 'El color debe ser un código hexadecimal válido (ej. #DC2626).',
         ];
     }
 }
