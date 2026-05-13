@@ -33,7 +33,7 @@
     </form>
     <button type="button"
         onclick="openModal('delete-book-form', 'delete-book-modal')"
-        class="bg-red-600 text-white hover:bg-red-800 text-sm rounded px-2">
+        class="bg-red-600 text-white hover:bg-red-800 rounded px-2 py-2">
 
         Eliminar libro
     </button>

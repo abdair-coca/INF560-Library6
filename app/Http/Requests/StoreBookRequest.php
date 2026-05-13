@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidIsbn;
+use App\Rules\ValidYear;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Rules\ValidImgURL;
 
 class StoreBookRequest extends FormRequest
 {
@@ -37,16 +39,28 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title'            => ['required', 'string', 'max:255'],
-            'isbn'             => ['nullable', 'string', 'max:13',
-                                   Rule::unique('books', 'isbn'),
-                                   new ValidIsbn],
+            'isbn'             => [
+                'nullable',
+                'string',
+                'max:13',
+                Rule::unique('books', 'isbn'),
+                new ValidIsbn,
+            ],
             'publisher'        => ['nullable', 'string', 'max:150'],
-            'publication_year' => ['nullable', 'integer', 'min:1000',
-                                   'max:' . date('Y')],
+            'publish_year' => [
+                'nullable',
+                'integer',
+                new ValidYear,
+            ],
             'pages'            => ['nullable', 'integer', 'min:1'],
             'language'         => ['nullable', 'string', 'max:50'],
             'description'      => ['nullable', 'string'],
-            'cover_url'        => ['nullable', 'url', 'max:500'],
+            'cover_url' => [
+                'nullable',
+                'url',
+                'max:500',
+                new ValidImgURL,
+            ],
             'total_copies'     => ['required', 'integer', 'min:1'],
             'category_id'      => ['required', Rule::exists('categories', 'id')],
             'authors'          => ['required', 'array', 'min:1'],
@@ -72,4 +86,3 @@ class StoreBookRequest extends FormRequest
         ];
     }
 }
- 

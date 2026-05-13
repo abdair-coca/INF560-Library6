@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\ValidIsbn;
+use App\Rules\ValidYear;
+use App\Rules\ValidImgURL;
 
 class UpdateBookRequest extends FormRequest
 {
@@ -33,16 +36,28 @@ class UpdateBookRequest extends FormRequest
         return [
             'title'            => ['required', 'string', 'max:255'],
             // unique ignora el propio registro al actualizar
-            'isbn'             => ['nullable', 'string', 'max:13',
-                                   Rule::unique('books', 'isbn')->ignore($bookId),
-                                   new ValidIsbn],
+            'isbn'             => [
+                'nullable',
+                'string',
+                'max:13',
+                Rule::unique('books', 'isbn')->ignore($bookId),
+                new ValidIsbn,
+            ],
             'publisher'        => ['nullable', 'string', 'max:150'],
-            'publication_year' => ['nullable', 'integer', 'min:1000',
-                                   'max:' . date('Y')],
+            'publish_year' => [
+                'nullable',
+                'integer',
+                new ValidYear,
+            ],
             'pages'            => ['nullable', 'integer', 'min:1'],
             'language'         => ['nullable', 'string', 'max:50'],
             'description'      => ['nullable', 'string'],
-            'cover_url'        => ['nullable', 'url', 'max:500'],
+            'cover_url' => [
+                'nullable',
+                'url',
+                'max:500',
+                new ValidImgURL,
+            ],
             // total_copies: solo obligatorio si se envía explícitamente
             'total_copies'     => [
                 Rule::when(
