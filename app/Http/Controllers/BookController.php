@@ -1,17 +1,27 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-
 use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class BookController extends Controller
+class BookController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // index y show son públicos; todo lo demás requiere auth
+            new Middleware('auth', except: ['index', 'show']),
+
+            // Solo las operaciones de escritura requieren rol librarian
+            new Middleware('role:librarian', only: ['create', 'store', 'edit', 'update', 'destroy']),
+        ];
+    }
+
     public function index()
     {
         $books = Book::with(['category', 'authors'])

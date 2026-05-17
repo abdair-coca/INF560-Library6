@@ -6,9 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // index y show son públicos; todo lo demás requiere auth
+            new Middleware('auth', except: ['index', 'show']),
+
+            // Solo las operaciones de escritura requieren rol librarian
+            // trashed y restore solo necesitan auth (ya cubierto arriba)
+            new Middleware('role:librarian', only: ['create', 'store', 'edit', 'update', 'destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

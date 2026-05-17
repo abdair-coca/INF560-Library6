@@ -2,40 +2,39 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Member;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    use Notifiable;
+    protected $fillable = ['name', 'email', 'password', 'role'];
+    protected $hidden = ['password', 'remember_token'];
+    protected $casts = ['email_verified_at' => 'datetime', 'password' => 'hashed'];
+    // Helpers de rol
+    public function isAdmin(): bool
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->role === 'admin';
     }
-
-    /**
-     * Relación: el usuario tiene un perfil de miembro.
-     */
-    public function member(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function isLibrarian(): bool
     {
-        return $this->hasOne(Member::class);
+        return $this->role === 'librarian';
+    }
+    public function isMember(): bool
+    {
+        return $this->role === 'member';
+    }
+    public function hasRole(string $role): bool
+    {
+        return match ($role) {
+            'admin' => $this->isAdmin(),
+            'librarian' => $this->isAdmin() || $this->isLibrarian(),
+            'member' => true,
+            default => false,
+        };
+    }
+    public function member()
+    {
+        return $this->hasOne(\App\Models\Member::class);
     }
 }

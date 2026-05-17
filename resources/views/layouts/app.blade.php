@@ -10,30 +10,43 @@
 
 <body class="bg-gray-100 min-h-screen">
     <nav class="bg-blue-800 text-white p-4 shadow-md">
-        {{-- Dentro de <nav>, en la sección de enlaces (md:flex) --}}
-        <div class="hidden md:flex items-center gap-6">
-            <a href="{{ route('books.index') }}"
-                class="hover:text-amber-300 transition">Catálogo</a>
-            <a href="{{ route('authors.index') }}"
-                class="hover:text-amber-300 transition">Autores</a>
-            <a href="{{ route('categories.index') }}"
-                class="hover:text-amber-300 transition">Categorias</a>
-            <a href="{{ route('books.trashed') }}"
-                class="hover:text-amber-300 transition text-slate-400 text-sm">
-                Eliminados
-            </a>
+        <div class="hidden md:flex items-center gap-4">
+            <a href="{{ route('books.index') }}" class="hover:text-amber-300">Catálogo</a>
+            <a href="{{ route('authors.index') }}" class="hover:text-amber-300">Autores</a>
+            <a href="{{ route('categories.index') }}" class="hover:text-amber-300">Categories</a>
+            @auth
+            {{-- Solo usuarios autenticados ven estos enlaces --}}
+            @if(Auth::user()->hasRole('librarian'))
             <a href="{{ route('books.create') }}"
                 class="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-sm">
                 + Libro
             </a>
-            <a href="{{ route('authors.create') }}"
+            @endif
+            <div class="relative group">
+                <button class="flex items-center gap-1 hover:text-amber-300">
+                    {{ Auth::user()->name }}
+                    <span class="text-xs">({{ Auth::user()->role }})</span>
+                </button>
+            </div>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit"
+                    class="border border-slate-500 hover:border-white px-3 py-1 rounded text-sm">
+                    Cerrar sesión
+                </button>
+            </form>
+            @endauth
+            @guest
+            {{-- Botones para visitantes no autenticados --}}
+            <a href="{{ route('login') }}"
                 class="border border-slate-500 hover:border-white px-3 py-1 rounded text-sm">
-                + Autor
+                Iniciar sesión
             </a>
-            <a href="{{ route('categories.create') }}"
-                class="border border-slate-500 hover:border-white px-3 py-1 rounded text-sm">
-                + Categoria
+            <a href="{{ route('register') }}"
+                class="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-sm">
+                Registrarse
             </a>
+            @endguest
         </div>
     </nav>
 
@@ -75,4 +88,5 @@
         closeModal(modalId);
     }
 </script>
+
 </html>

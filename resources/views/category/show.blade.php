@@ -7,12 +7,15 @@
     <a href="{{ route('categories.index') }}" class="text-blue-600 hover:underline">
         ← Volver a categorias
     </a>
-
-    <a href="{{ route('categories.edit', $category) }}"
-       class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded text-sm">
-        Editar Categoria
-    </a>
-</div>
+    @auth
+        @if(Auth::user()->hasRole('librarian'))
+        <a href="{{ route('categories.edit', $category) }}"
+        class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded text-sm">
+            Editar Categoria
+        </a>
+        @endif
+    @endauth
+    </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     @foreach($books as $book)
     <x-book-card :book="$book" />
