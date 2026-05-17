@@ -15,13 +15,23 @@
             <a href="{{ route('authors.index') }}" class="hover:text-amber-300">Autores</a>
             <a href="{{ route('categories.index') }}" class="hover:text-amber-300">Categories</a>
             @auth
-            {{-- Solo usuarios autenticados ven estos enlaces --}}
-            @if(Auth::user()->hasRole('librarian'))
+            <a href="{{ route('profile') }}"
+                class="hover:text-amber-300 transition text-sm">
+                Mi Perfil
+            </a>
+
+            @role('librarian')
             <a href="{{ route('books.create') }}"
                 class="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-sm">
                 + Libro
             </a>
-            @endif
+            @endrole
+            @role('admin')
+            <a href="{{ route('categories.create') }}"
+                class="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-sm">
+                + Categoria
+            </a>
+            @endrole
             <div class="relative group">
                 <button class="flex items-center gap-1 hover:text-amber-300">
                     {{ Auth::user()->name }}
