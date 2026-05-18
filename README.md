@@ -1,241 +1,421 @@
-# 📚 Library App  
-### Sistema de Gestión de Biblioteca — *INF560 Backend Web*
+# 📚 Library App
+
+<p align="center">
+  <img src="docs/assets/library-banner.png" alt="Library App Banner" width="100%" />
+</p>
+
+<p align="center">
+  <strong>Modern Library Management System</strong><br>
+  Built with Laravel 13, PostgreSQL & TailwindCSS
+</p>
 
 <p align="center">
   <img alt="Laravel" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" />
   <img alt="PHP" src="https://img.shields.io/badge/PHP-8.3+-777BB4?style=for-the-badge&logo=php&logoColor=white" />
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-14+-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
   <img alt="TailwindCSS" src="https://img.shields.io/badge/TailwindCSS-UI-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img alt="License" src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge" />
   <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-A855F7?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <strong>Estilo visual:</strong> Divertido & Colorido 🎨 · Neo-brutalist ✨ · UX amigable 🫶
+  <a href="#-features">Features</a> •
+  <a href="#-preview">Preview</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-project-architecture">Architecture</a> •
+  <a href="#-roadmap">Roadmap</a>
 </p>
 
 ---
 
-## ✨ Descripción
+# ✨ Overview
 
-**Library App** es una aplicación web para la gestión integral de biblioteca construida con **Laravel 13**, **PHP 8.3+** y **PostgreSQL**.  
-El proyecto fue desarrollado de forma **incremental por guías de laboratorio**, evolucionando desde la configuración inicial hasta una arquitectura robusta con buenas prácticas backend y frontend.
+**Library App** is a modern and colorful library management system designed for academic and real-world learning purposes.
 
-### Objetivo funcional
-Permitir administrar:
+The project was developed incrementally through backend laboratory guides for the subject:
 
-- 📖 Libros  
-- ✍️ Autores  
-- 🏷️ Categorías  
-- 👤 Miembros  
-- 🔁 Préstamos  
-- 🔐 Usuarios y autenticación por roles
+> **INF560 — Backend Web Development**
+
+It focuses on:
+
+- scalable backend architecture
+- clean code practices
+- RESTful design
+- reusable UI components
+- maintainable Laravel structure
+- developer-friendly experience
 
 ---
 
-## 🖼️ Vista de la Aplicación (espacios para imágenes)
+# 🎯 Features
 
+<div align="center">
 
-### 1) Dashboard principal
+| Feature | Description |
+|---|---|
+| 📖 Books Management | Complete CRUD for books |
+| ✍️ Authors | Many-to-many relationships |
+| 🏷️ Categories | Book classification system |
+| 👤 Members | User/member administration |
+| 🔁 Loans | Loan and availability logic |
+| 🔐 Authentication | Login, roles & middleware |
+| 🗑️ Soft Deletes | Safe record deletion |
+| ✅ Validations | Form Requests & custom rules |
+| ⚡ Optimized Queries | Eager loading & clean ORM usage |
+
+</div>
+
+---
+
+# 🖼️ Preview
+
+## 🏠 Dashboard
+
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="Dashboard principal de Library App" width="900">
+  <img src="docs/screenshots/dashboard.png" alt="Dashboard" width="100%">
 </p>
 
 ---
 
-### 2) Listado de libros
+## 📚 Books List
+
 <p align="center">
-  <img src="docs/screenshots/books-index.png" alt="Listado de libros" width="900">
+  <img src="docs/screenshots/books-index.png" alt="Books List" width="100%">
 </p>
 
 ---
 
-### 3) Detalle de libro
+## 📖 Book Details
+
 <p align="center">
-  <img src="docs/screenshots/book-show.png" alt="Detalle de libro" width="900">
+  <img src="docs/screenshots/book-show.png" alt="Book Details" width="100%">
 </p>
 
 ---
 
-### 4) Formulario de creación/edición
+## ✏️ Book Form
+
 <p align="center">
-  <img src="docs/screenshots/book-form.png" alt="Formulario de libro" width="900">
+  <img src="docs/screenshots/book-form.png" alt="Book Form" width="100%">
 </p>
 
 ---
 
-### 5) Gestión de autores
+## 👨‍💼 Authors Management
+
 <p align="center">
-  <img src="docs/screenshots/authors-index.png" alt="Listado de autores" width="900">
+  <img src="docs/screenshots/authors-index.png" alt="Authors" width="100%">
 </p>
 
 ---
 
-### 6) Categorías
+## 🏷️ Categories
+
 <p align="center">
-  <img src="docs/screenshots/categories-index.png" alt="Listado de categorías" width="900">
+  <img src="docs/screenshots/categories-index.png" alt="Categories" width="100%">
 </p>
 
 ---
 
-### 7) Pantalla de login
+## 🔐 Authentication
+
 <p align="center">
-  <img src="docs/screenshots/auth-login.png" alt="Pantalla de inicio de sesión" width="900">
+  <img src="docs/screenshots/auth-login.png" alt="Login" width="100%">
 </p>
 
 ---
 
-## 🧠 Contexto Académico
+# 🧠 Academic Context
 
-- **Materia:** INF560 — Desarrollo Web Backend  
-- **Universidad:** Universidad Autónoma Tomás Frías (UATF), Potosí - Bolivia  
-- **Docente:** M. Sc. Huáscar Fedor Gonzales Guzmán
+| Field | Information |
+|---|---|
+| 📘 Subject | INF560 — Backend Web Development |
+| 🏫 University | Universidad Autónoma Tomás Frías (UATF) |
+| 📍 Location | Potosí, Bolivia |
+| 👨‍🏫 Professor | M. Sc. Huáscar Fedor Gonzales Guzmán |
 
 ---
 
-## 🧱 Stack Tecnológico
+# 🧱 Tech Stack
 
-### Backend
+## ⚙️ Backend
+
 - Laravel 13
 - PHP 8.3+
 - Eloquent ORM
-- Form Requests / Validaciones personalizadas
+- Form Requests
+- RESTful Controllers
+- Middleware & Authentication
 
-### Base de datos
+---
+
+## 🗄️ Database
+
 - PostgreSQL 14+
-- Migraciones y seeders
+- Laravel Migrations
+- Seeders & Factories
 
-### Frontend
+---
+
+## 🎨 Frontend
+
 - Blade Templates
-- Tailwind CSS
-- Componentes reutilizables
+- TailwindCSS
+- Reusable Components
+- Responsive Design
 
 ---
 
-## 🎨 Identidad de Diseño (alineada al proyecto)
+# 🎨 Design System
 
-Este repositorio sigue un diseño:
+The project follows a visual identity inspired by:
 
-- **Divertido y colorido**
-- **Tipografías:** Fredoka One + Nunito
-- **Paleta brand:** amarillo, naranja, rosa, azul, púrpura, verde
-- **Sombras neo-brutalist:** bordes marcados y sombras desplazadas
+- 🎨 Neo-brutalist UI
+- ✨ Friendly UX
+- 🌈 Vibrant colors
+- 🧩 Rounded components
+- 📦 Strong shadows & borders
 
-> Esta identidad visual ayuda a que la experiencia sea más humana, clara y memorable.
+### Typography
+
+- Fredoka One
+- Nunito
+
+### Brand Palette
+
+| Color | Usage |
+|---|---|
+| 🟡 Yellow | Highlights |
+| 🟠 Orange | Actions |
+| 🌸 Pink | Accent |
+| 🔵 Blue | Primary |
+| 🟣 Purple | Branding |
+| 🟢 Green | Success |
 
 ---
 
-## ⚙️ Requisitos Previos
+# ⚡ Installation
+
+## 📋 Requirements
 
 - PHP 8.3+
 - Composer
 - PostgreSQL 14+
+- Node.js 18+
 - Git
-- Node.js 18+ (opcional para assets)
 
-### Verificación rápida
+---
+
+## 🚀 Quick Setup
+
+### 1️⃣ Clone Repository
 
 ```bash
-php --version
-composer --version
-psql --version
-git --version
-node --version
-🚀 Instalación Rápida
-# 1) Clonar repositorio
 git clone https://github.com/HuascarFedor/INF560_libraryApp.git
 cd INF560_libraryApp
+```
 
-# 2) Variables de entorno
+---
+
+### 2️⃣ Environment Variables
+
+```bash
 cp .env.example .env
+```
 
-# 3) Instalar dependencias PHP
+---
+
+### 3️⃣ Install Dependencies
+
+```bash
 composer install
+```
 
-# 4) Generar clave
+---
+
+### 4️⃣ Generate Application Key
+
+```bash
 php artisan key:generate
+```
 
-# 5) Ejecutar migraciones + seeders
-php artisan migrate --seed
+---
 
-# 6) (Opcional) Frontend
-npm install
-npm run dev
+### 5️⃣ Configure PostgreSQL
 
-# 7) Levantar servidor local
-php artisan serve
-Aplicación disponible en:
-👉 http://localhost:8000
+Create database:
 
-🗄️ Configuración de Base de Datos (PostgreSQL)
-Crea una base de datos local:
-
+```sql
 CREATE DATABASE library_db;
-Ejemplo mínimo para .env:
+```
 
+Example `.env`:
+
+```env
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=library_db
 DB_USERNAME=postgres
-DB_PASSWORD=tu_contraseña
-🧭 Comandos Útiles
-# Rutas
-php artisan route:list
+DB_PASSWORD=your_password
+```
 
-# Migraciones
+---
+
+### 6️⃣ Run Migrations & Seeders
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+### 7️⃣ Frontend Assets
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+### 8️⃣ Start Development Server
+
+```bash
+php artisan serve
+```
+
+Application available at:
+
+```txt
+http://localhost:8000
+```
+
+---
+
+# 🧭 Useful Commands
+
+## 📌 Routes
+
+```bash
+php artisan route:list
+```
+
+---
+
+## 🗄️ Database
+
+```bash
 php artisan migrate
 php artisan migrate:refresh --seed
+```
 
-# Cache
+---
+
+## ⚡ Cache
+
+```bash
 php artisan cache:clear
 php artisan config:clear
+```
 
-# Generadores
-php artisan make:model NombreModelo -m
-php artisan make:controller NombreController --resource
-php artisan make:seeder NombreSeeder
+---
 
-# REPL
+## 🏗️ Generators
+
+```bash
+php artisan make:model Book -m
+php artisan make:controller BookController --resource
+php artisan make:seeder BookSeeder
+```
+
+---
+
+## 🧪 REPL
+
+```bash
 php artisan tinker
-🧩 Arquitectura Funcional (resumen)
-Books: CRUD completo, soft delete, validaciones y relación con autores/categorías.
+```
 
-Authors: gestión y asociación Many-to-Many.
+---
 
-Categories: clasificación de libros.
+# 🧩 Project Architecture
 
-Loans: reglas de negocio para disponibilidad y préstamo.
+```txt
+app/
+├── Http/
+│   ├── Controllers/
+│   ├── Requests/
+│   └── Middleware/
+│
+├── Models/
+│
+resources/
+├── views/
+│   ├── books/
+│   ├── authors/
+│   ├── categories/
+│   └── components/
+│
+database/
+├── migrations/
+├── seeders/
+└── factories/
+```
 
-Auth: login/registro, middleware y control por roles.
+---
 
-📚 Evolución por Guías (Roadmap Académico)
-Guía	Tag	Enfoque principal
-Guía 4	v0.1.0	Setup Laravel + PostgreSQL + migraciones base
-Guía 5	v0.2.0	Modelos, relaciones Eloquent, factories/seeders
-Guía 6	v0.3.0	Rutas REST, controladores y vistas Blade
-Guía 7	v0.4.0	CRUD completo con formularios y soft delete
-Guía 8	v0.5.0	Validación avanzada con Form Requests
-Guía 9	v0.6.0	Autenticación, middleware y roles
-✅ Buenas Prácticas Aplicadas
-Convenciones RESTful
+# 📚 Academic Roadmap
 
-Separación de responsabilidades (Controllers / Requests / Models)
+| Guide | Version | Main Focus |
+|---|---|---|
+| Guide 4 | v0.1.0 | Laravel setup + PostgreSQL |
+| Guide 5 | v0.2.0 | Models & Eloquent relationships |
+| Guide 6 | v0.3.0 | REST Controllers & Blade |
+| Guide 7 | v0.4.0 | Full CRUD + Soft Delete |
+| Guide 8 | v0.5.0 | Advanced validation |
+| Guide 9 | v0.6.0 | Authentication & Roles |
 
-Eager loading para optimización de consultas
+---
 
-Reutilización de componentes Blade
+# ✅ Best Practices Applied
 
-Manejo de errores y mensajes flash
+- RESTful conventions
+- Clean architecture
+- Separation of responsibilities
+- Reusable Blade components
+- Eager loading optimization
+- Form Request validation
+- Flash messages & error handling
+- Semantic commit structure
+- Git versioning with tags
 
-Versionado por tags de hitos
+---
 
-🧪 Testing
+# 🧪 Testing
+
+Run Laravel tests:
+
+```bash
 php artisan test
-Si usas PHPUnit directo:
+```
 
+Or directly with PHPUnit:
+
+```bash
 vendor/bin/phpunit
-📂 Estructura sugerida para assets del README
+```
+
+---
+
+# 📂 Suggested README Assets Structure
+
+```txt
 docs/
+├── assets/
+│   └── library-banner.png
+│
 └── screenshots/
     ├── dashboard.png
     ├── books-index.png
@@ -244,22 +424,55 @@ docs/
     ├── authors-index.png
     ├── categories-index.png
     └── auth-login.png
-🤝 Contribución
-Si quieres colaborar:
+```
 
-Haz un fork del proyecto
+---
 
-Crea una rama: feature/mi-mejora
+# 🤝 Contributing
 
-Commit: feat: agrega mejora X
+Contributions are welcome.
 
-Push y abre Pull Request
+## Workflow
 
-📄 Licencia
-Define aquí tu licencia (MIT, Apache-2.0, etc.).
-Si el proyecto es solo académico, indícalo explícitamente.
+```bash
+# Fork repository
 
-👨‍💻 Autor
-Desarrollado para la materia INF560 con enfoque en buenas prácticas de backend y una experiencia visual amigable para usuarios finales.
+# Create feature branch
+git checkout -b feature/my-feature
 
-<p align="center"> Hecho con Laravel ❤️ + diseño colorido 📚✨ </p> ```
+# Commit changes
+git commit -m "feat: add new feature"
+
+# Push branch
+git push origin feature/my-feature
+```
+
+Then open a Pull Request 🚀
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+If the project is used only for academic purposes, you can modify this section accordingly.
+
+---
+
+# 👨‍💻 Author
+
+Developed for the subject:
+
+> **INF560 — Backend Web Development**
+
+Focused on:
+- backend best practices
+- scalable Laravel architecture
+- modern UI experience
+- educational software engineering
+
+---
+
+<p align="center">
+  <strong>Built with Laravel ❤️ + colorful design 📚✨</strong>
+</p>
