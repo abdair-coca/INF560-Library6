@@ -126,6 +126,7 @@ It focuses on:
 | 🏫 University | Universidad Autónoma Tomás Frías (UATF) |
 | 📍 Location | Potosí, Bolivia |
 | 👨‍🏫 Professor | M. Sc. Huáscar Fedor Gonzales Guzmán |
+| 🧑‍🎓 Student | Univ. Abdair Magdiel Coca Carlo |
 
 ---
 
@@ -456,6 +457,7 @@ If the project is used only for academic purposes, you can modify this section a
 Developed for the subject:
 
 > **INF560 — Backend Web Development**
+> **Developed by Abdair Coca**
 
 Focused on:
 - backend best practices
