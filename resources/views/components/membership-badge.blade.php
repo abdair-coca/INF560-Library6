@@ -2,13 +2,19 @@
 
 @php
     $colors = [
-    'standart'       => 'bg-slate-200 text-slate-800',
-    'premium'        => 'bg-amber-200 text-amber-900',
-    'student'        => 'bg-blue-100 text-blue-800',
+    'standart'       => 'bg-brand-blue text-white',
+    'premium'        => 'bg-brand-yellow text-brand-dark',
+    'student'        => 'bg-brand-green text-brand-dark',
 ];
-    $colorBack = $colors[$member->membership_type] ?? 'bg-gray-100 text-gray-800';
+    $emojis = [
+    'standart'       => '🪪',
+    'premium'        => '⭐',
+    'student'        => '🎓',
+];
+    $colorBack = $colors[$member->membership_type] ?? 'bg-brand-pink text-white';
+    $emoji = $emojis[$member->membership_type] ?? '🎫';
 @endphp
 
-<span class="px-2 py-1 text-xs font-semibold rounded {{ $colorBack }}">
-    {{ $member->membership_type }}
+<span class="inline-flex items-center gap-1 px-3 py-1 text-xs font-extrabold rounded-full border-2 border-brand-dark shadow-neo-sm {{ $colorBack }}">
+    {{ $emoji }} {{ $member->membership_type }}
 </span>

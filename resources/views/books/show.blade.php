@@ -1,93 +1,141 @@
 @extends('layouts.app')
 @section('title', $book->title)
 @section('content')
+
+{{-- ===== Volver ===== --}}
 <a href="{{ route('books.index') }}"
-    class="text-sm text-slate-600 hover:text-slate-900 mb-4 inline-block">
+    class="inline-flex items-center gap-1.5 font-extrabold text-sm px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark bg-white shadow-neo-btn text-brand-dark transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo mb-6">
     ← Volver al catálogo
 </a>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+<div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-7">
+
     {{-- ===== Columna izquierda: portada ===== --}}
-    <div class="lg:col-span-1">
+    <aside class="lg:col-span-1">
         @if($book->cover_url)
-        <img src="{{ $book->cover_url }}" alt="{{ $book->title }}"
-            class="w-full rounded shadow-md">
+        <div
+            class="aspect-[2/3] rounded-2xl border-[3px] border-brand-dark shadow-neo overflow-hidden bg-brand-bg">
+            <img src="{{ $book->cover_url }}" alt="{{ $book->title }}"
+                class="w-full h-full object-cover">
+        </div>
         @else
-        <div class="w-full aspect-[2/3] bg-slate-200 rounded flex
-items-center
- justify-center text-slate-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20"
-                fill="none"
-                viewBox="0 0 24 24" stroke="currentColor" strokewidth="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5
- S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18
-7.5 18" />
-            </svg>
+        <div
+            class="aspect-[2/3] rounded-2xl border-[3px] border-brand-dark shadow-neo bg-brand-pink flex items-center justify-center text-8xl relative overflow-hidden">
+            <span class="drop-shadow-[3px_3px_0_rgba(0,0,0,0.2)]">📗</span>
+            <div class="absolute inset-0 bg-gradient-to-br from-white/25 to-transparent pointer-events-none"></div>
         </div>
         @endif
-    </div>
+    </aside>
+
     {{-- ===== Columna derecha: información ===== --}}
-    <div class="lg:col-span-2 space-y-4">
-        <div>
-            <h1 class="text-3xl font-bold text-slate-900">{{ $book->title }}</h1>
-            <p class="text-slate-600 mt-1">
-                @foreach($book->authors as $author)
-                <a href="{{ route('authors.show', $author) }}"
-                    class="hover:underline">{{ $author->full_name }}</a>@if(!$loop->last), @endif
-                @endforeach
+    <div class="flex flex-col gap-5">
+
+        <header>
+            <h1 class="font-fredoka text-4xl md:text-5xl leading-tight text-brand-dark">
+                {{ $book->title }}
+            </h1>
+            <p class="font-extrabold text-brand-orange flex items-center gap-1.5 mt-2 text-base">
+                ✏️
+                <span>
+                    @foreach($book->authors as $author)
+                    <a href="{{ route('authors.show', $author) }}"
+                        class="hover:underline">{{ $author->full_name }}</a>@if(!$loop->last), @endif
+                    @endforeach
+                </span>
             </p>
+        </header>
+
+        {{-- Chips de metadata --}}
+        <div class="flex flex-wrap gap-2">
+            @if($book->isbn)
+            <span
+                class="bg-brand-blue px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark font-extrabold text-sm shadow-neo-sm">
+                📚 ISBN: {{ $book->isbn }}
+            </span>
+            @endif
+            @if($book->publish_year)
+            <span
+                class="bg-brand-yellow px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark font-extrabold text-sm shadow-neo-sm">
+                📅 {{ $book->publish_year }}
+            </span>
+            @endif
+            @if($book->pages)
+            <span
+                class="bg-brand-green px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark font-extrabold text-sm shadow-neo-sm">
+                📄 {{ $book->pages }} páginas
+            </span>
+            @endif
+            @if($book->publisher)
+            <span
+                class="bg-brand-pink text-white px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark font-extrabold text-sm shadow-neo-sm">
+                🏢 {{ $book->publisher }}
+            </span>
+            @endif
+            @if($book->language)
+            <span
+                class="bg-brand-purple text-white px-4 py-1.5 rounded-full border-[2.5px] border-brand-dark font-extrabold text-sm shadow-neo-sm">
+                🌐 {{ $book->language }}
+            </span>
+            @endif
         </div>
-        <div class="flex gap-2 items-center">
+
+        {{-- Categoría + estado --}}
+        <div class="flex items-center gap-2 flex-wrap">
             <x-category-badge :category="$book->category" />
             <x-book-status-badge :status="$book->status" />
         </div>
-        <dl class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-            <dt class="text-slate-500">ISBN</dt>
-            <dd>{{ $book->isbn ?? '—' }}</dd>
-            <dt class="text-slate-500">Editorial</dt>
-            <dd>{{ $book->publisher ?? '—' }}</dd>
-            <dt class="text-slate-500">Año de publicación</dt>
-            <dd>{{ $book->publish_year ?? '—' }}</dd>
-            <dt class="text-slate-500">Páginas</dt>
-            <dd>{{ $book->pages ?? '—' }}</dd>
-            <dt class="text-slate-500">Idioma</dt>
-            <dd>{{ $book->language ?? '—' }}</dd>
-        </dl>
+
+        {{-- Descripción --}}
         @if($book->description)
-        <div class="pt-2">
-            <h2 class="font-semibold text-slate-900 mb1">Descripción</h2>
-            <p class="text-slate-700 leading-relaxed">{{ $book->description }}</p>
-        </div>
-        @endif
-        {{-- ===== Disponibilidad ===== --}}
-        <div class="bg-slate-100 rounded p-4">
-            <h2 class="font-semibold text-slate-900 mb1">Disponibilidad</h2>
-            <p class="text-slate-700">
-                <span class="text-2xl font-bold text-slate-900">
-                    {{ $book->available_copies }}
-                </span>
-                de {{ $book->total_copies }} copias disponibles
+        <article
+            class="bg-white border-[2.5px] border-brand-dark rounded-2xl p-5 shadow-neo-sm">
+            <p class="font-fredoka text-base text-brand-purple mb-2 flex items-center gap-2">
+                📝 Descripción
             </p>
-        </div>
-        {{-- Dentro de books/show.blade.php, después del bloque de disponibilidad --}}
-        <div class="flex gap-3 pt-4">
+            <p class="text-sm font-semibold leading-relaxed text-brand-dark/70">
+                {{ $book->description }}
+            </p>
+        </article>
+        @endif
+
+        {{-- Disponibilidad --}}
+        <article
+            class="bg-brand-yellow border-[2.5px] border-brand-dark rounded-2xl p-5 shadow-neo-sm flex items-center justify-between gap-4">
+            <div>
+                <p class="font-fredoka text-base text-brand-dark mb-1 flex items-center gap-2">
+                    📦 Disponibilidad
+                </p>
+                <p class="font-extrabold text-sm text-brand-dark/80">
+                    <span class="font-fredoka text-3xl text-brand-dark align-middle">
+                        {{ $book->available_copies }}
+                    </span>
+                    <span class="text-brand-dark/60">/ {{ $book->total_copies }} copias libres</span>
+                </p>
+            </div>
+            <span class="text-5xl">{{ $book->available_copies > 0 ? '✅' : '⏳' }}</span>
+        </article>
+
+        @role('librarian')
+        {{-- Acciones --}}
+        <div class="flex gap-3 flex-wrap pt-2">
             <a href="{{ route('books.edit', $book) }}"
-                class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded text-sm">
-                Editar libro
+                class="font-fredoka text-base px-6 py-2.5 rounded-full border-[2.5px] border-brand-dark shadow-neo-btn bg-brand-orange text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo">
+                ✏️ Editar libro
             </a>
+
             <form id="delete-book-form"
                 action="{{ route('books.destroy', $book) }}"
                 method="POST">
-
                 @csrf
                 @method('DELETE')
             </form>
+
             <button type="button"
                 onclick="openModal('delete-book-form', 'delete-book-modal')"
-                class="bg-red-600 text-white hover:bg-red-800 text-sm rounded px-2">
-
-                Eliminar libro
+                class="font-fredoka text-base px-6 py-2.5 rounded-full border-[2.5px] border-brand-dark shadow-neo-btn bg-brand-pink text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo">
+                🗑️ Eliminar libro
             </button>
+
             <x-confirm-modal
                 id="delete-book-modal"
                 title="Eliminar libro"
@@ -95,45 +143,51 @@ items-center
 
                 <button type="button"
                     onclick="confirmAction('delete-book-modal')"
-                    class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
-
-                    Confirmar
+                    class="font-fredoka text-sm px-5 py-2 rounded-full border-[2.5px] border-brand-dark bg-brand-pink text-white shadow-neo-btn transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo">
+                    🗑️ Confirmar
                 </button>
 
             </x-confirm-modal>
         </div>
+        @endrole
 
         {{-- ===== Préstamos activos ===== --}}
         @if($book->activeLoans->isNotEmpty())
-        <div class="pt-2">
-            <h2 class="font-semibold text-slate-900 mb-2">Préstamos
-                activos</h2>
-            <table class="w-full text-sm">
-                <thead class="bg-slate-200 text-slate-700">
-                    <tr>
-                        <th class="text-left px-3 py-2">Miembro</th>
-                        <th class="text-left px-3 py-2">Fecha
-                            préstamo</th>
-                        <th class="text-left px-3 py-2">Devolución</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($book->activeLoans as $loan)
-                    <tr class="border-b border-slate-200">
-                        <td class="px-3 py-2">
-                            {{ $loan->member->user->name ?? '—' }}
-                        </td>
-                        <td class="px-3 py-2">
-                            {{ $loan->loaned_at?->format('d/m/Y') }}
-                        </td>
-                        <td class="px-3 py-2">
-                            {{ $loan->due_at?->format('d/m/Y') }}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <section
+            class="bg-white border-[3px] border-brand-dark rounded-[20px] shadow-neo overflow-hidden mt-2">
+
+            <div
+                class="bg-brand-purple px-5 py-3 border-b-[2.5px] border-brand-dark font-fredoka text-lg text-white flex items-center gap-2">
+                📤 Préstamos activos
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-brand-bg border-b-2 border-dashed border-brand-dark/20">
+                        <tr class="font-fredoka text-brand-dark">
+                            <th class="text-left px-5 py-3">Miembro</th>
+                            <th class="text-left px-5 py-3">📅 Fecha préstamo</th>
+                            <th class="text-left px-5 py-3">⏰ Devolución</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($book->activeLoans as $loan)
+                        <tr class="border-b border-dashed border-gray-200 font-bold hover:bg-orange-50 transition-colors">
+                            <td class="px-5 py-3 text-brand-dark">
+                                {{ $loan->member->user->name ?? '—' }}
+                            </td>
+                            <td class="px-5 py-3 text-brand-dark/70">
+                                {{ $loan->loaned_at?->format('d/m/Y') }}
+                            </td>
+                            <td class="px-5 py-3 text-brand-dark/70">
+                                {{ $loan->due_at?->format('d/m/Y') }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </section>
         @endif
     </div>
 </div>

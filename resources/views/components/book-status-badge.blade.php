@@ -1,14 +1,16 @@
 @props(['status'])
 
 @php
-    $colors = [
-        'available' => 'bg-green-100 text-green-800',
-        'unavailable' => 'bg-red-100 text-red-800',
-        'maintenance' => 'bg-yellow-100 text-yellow-800',
+    $styles = [
+        'available'   => ['bg-brand-green', 'text-brand-dark', '✓', 'Disponible'],
+        'unavailable' => ['bg-brand-orange', 'text-white', '📤', 'Prestado'],
+        'maintenance' => ['bg-brand-yellow', 'text-brand-dark', '🛠️', 'Mantenimiento'],
     ];
-    $colorClass = $colors[$status] ?? 'bg-gray-100 text-gray-800';
+    [$bg, $fg, $icon, $label] = $styles[$status] ?? ['bg-white', 'text-brand-dark', '•', ucfirst($status)];
 @endphp
 
-<span class="px-2 py-1 text-xs font-semibold rounded-full {{ $colorClass }}">
-    {{ ucfirst($status) }}
+<span
+    class="inline-flex items-center gap-1 text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-brand-dark shadow-neo-sm {{ $bg }} {{ $fg }}">
+    <span>{{ $icon }}</span>
+    {{ $label }}
 </span>

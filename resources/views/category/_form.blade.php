@@ -1,34 +1,34 @@
 <div>
-    <label class="block text-sm font-medium text-slate-700 mb-1">
-        Título <span class="text-red-500">*</span>
+    <label class="block font-fredoka text-sm text-brand-purple mb-1.5">
+        🏷️ Título <span class="text-brand-pink">*</span>
     </label>
     <input type="text" name="name"
         value="{{ old('name', $category->name ?? '') }}"
-        class="w-full border @error('name') border-red-400 @else border-slate-300
-@enderror
- rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        class="w-full border-[2.5px] @error('name') border-brand-pink bg-pink-50 @else border-brand-dark @enderror rounded-full px-4 py-2 font-nunito font-bold text-sm shadow-neo-sm focus:outline-none focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-neo transition-all">
     @error('name')
-    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    <p class="text-brand-pink font-extrabold text-xs mt-1.5 flex items-center gap-1">⚠️ {{ $message }}</p>
     @enderror
 </div>
 {{-- Campo: Descripción --}}
 <div>
-    <label for="description" class="block text-sm font-medium text-slate-700 mb-1">Descripción</label>
+    <label for="description" class="block font-fredoka text-sm text-brand-purple mb-1.5">📝 Descripción</label>
     <textarea name="description" id="description" rows="4"
-        class="w-full border border-slate-300 rounded px-3 py-2">
-    {{ old('description', $category->description ?? '') }}
-    </textarea>
+        class="w-full border-[2.5px] border-brand-dark rounded-2xl px-4 py-3 font-nunito font-semibold text-sm shadow-neo-sm focus:outline-none focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-neo transition-all resize-none">{{ old('description', $category->description ?? '') }}</textarea>
 </div>
 {{-- Campo color --}}
 <div>
-    <label class="block text-sm font-medium text-slate-700 mb-1">Color</label>
-    <input type="text" name="color"
-        value="{{ old('color', $category->color ?? '#3B82F6') }}"
-        class="w-full h-10 border border-slate-300 rounded px-1 py-1
-        @error('color') border-red-400 bg-red-50 @else border-slate-300 @enderror
-                  focus:outline-none focus:ring-2 focus:ring-amber-500"
-        maxLength="7">
+    <label class="block font-fredoka text-sm text-brand-purple mb-1.5">🎨 Color</label>
+    <div class="flex items-center gap-3">
+        <input type="text" name="color"
+            value="{{ old('color', $category->color ?? '#3B82F6') }}"
+            class="flex-1 h-11 border-[2.5px] rounded-full px-4 py-1 font-mono font-bold text-sm shadow-neo-sm
+            @error('color') border-brand-pink bg-pink-50 @else border-brand-dark @enderror
+                      focus:outline-none focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-neo transition-all"
+            maxLength="7">
+        <div class="w-11 h-11 rounded-full border-[2.5px] border-brand-dark shadow-neo-sm shrink-0"
+            style="background-color: {{ old('color', $category->color ?? '#3B82F6') }}"></div>
+    </div>
     @error('color')
-    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    <p class="mt-1.5 text-xs font-extrabold text-brand-pink flex items-center gap-1">⚠️ {{ $message }}</p>
     @enderror
 </div>

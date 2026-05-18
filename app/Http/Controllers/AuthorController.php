@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class AuthorController extends Controller
+class AuthorController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // index y show son públicos; todo lo demás requiere auth
+            new Middleware('auth', except: ['index', 'show']),
+
+            // Solo las operaciones de escritura requieren rol librarian
+            new Middleware('role:librarian', only: ['create', 'store', 'edit', 'update', 'destroy']),
+        ];
+    }
     public function index()
     {
         $authors = Author::withCount('books')

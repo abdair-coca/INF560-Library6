@@ -1,24 +1,35 @@
 @props(['category'])
 
 @php
-    $colors = [
-    'Arte'           => 'bg-pink-100 text-pink-800',
-    'Biografía'      => 'bg-amber-100 text-amber-800',
-    'Ciencia'        => 'bg-cyan-100 text-cyan-800',
-    'Ciencia Ficción'=> 'bg-violet-100 text-violet-800',
-    'Filosofía'      => 'bg-indigo-100 text-indigo-800',
-    'Historia'       => 'bg-orange-100 text-orange-800',
-    'Infantil'       => 'bg-lime-100 text-lime-800',
-    'Novela'         => 'bg-rose-100 text-rose-800',
-    'Poesía'         => 'bg-purple-100 text-purple-800',
-    'Tecnología'     => 'bg-teal-100 text-teal-800',
-];
-    $colorBack = $colors[$category->name] ?? 'bg-gray-100 text-gray-800';
+    $palette = [
+        'Arte'             => ['bg-brand-pink', 'text-brand-dark', '🎨'],
+        'Biografía'        => ['bg-brand-yellow', 'text-brand-dark', '📜'],
+        'Ciencia'          => ['bg-brand-blue', 'text-brand-dark', '🔬'],
+        'Ciencia Ficción'  => ['bg-brand-purple', 'text-white', '🚀'],
+        'Filosofía'        => ['bg-brand-purple', 'text-white', '🧠'],
+        'Historia'         => ['bg-brand-orange', 'text-white', '🏛️'],
+        'Infantil'         => ['bg-brand-green', 'text-brand-dark', '🧸'],
+        'Novela'           => ['bg-brand-pink', 'text-brand-dark', '📖'],
+        'Poesía'           => ['bg-brand-purple', 'text-white', '🪶'],
+        'Tecnología'       => ['bg-brand-blue', 'text-brand-dark', '💻'],
+    ];
+    [$bg, $fg, $emoji] = $palette[$category->name] ?? ['bg-brand-yellow', 'text-brand-dark', '🏷️'];
 @endphp
 
-<div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full border border-gray-200 hover:shadow-lg transition">
-    <div class="p-4 flex-grow {{ $colorBack }}">
-        <a  href="{{ route('categories.show', $category) }}" class="text-blue-600 text-xl font-bold hover:underline">{{$category->name}}</a>
-        <p> Cantidad de libros: {{$category->books_count}}</p>
+<a href="{{ route('categories.show', $category) }}"
+    class="group block {{ $bg }} {{ $fg }} border-[3px] border-brand-dark rounded-[20px] shadow-neo p-6 transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-neo-hover relative overflow-hidden">
+
+    {{-- emoji decorativo de fondo --}}
+    <span
+        class="absolute right-3 bottom-2 text-7xl opacity-20 leading-none pointer-events-none select-none">
+        {{ $emoji }}
+    </span>
+
+    <div class="relative flex flex-col gap-2">
+        <span class="text-4xl">{{ $emoji }}</span>
+        <span class="font-fredoka text-2xl leading-tight">{{ $category->name }}</span>
+        <span class="font-extrabold text-xs opacity-80 flex items-center gap-1">
+            📚 {{ $category->books_count }} libro{{ $category->books_count == 1 ? '' : 's' }}
+        </span>
     </div>
-</div>
+</a>
