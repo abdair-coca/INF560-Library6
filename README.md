@@ -1,7 +1,7 @@
 # 📚 Library App
 
 <p align="center">
-  <img src="docs/assets/library-banner.png" alt="Library App Banner" width="100%" />
+  <img src="docs/assets/library-banner.svg" alt="Library App Banner" width="100%" />
 </p>
 
 <p align="center">

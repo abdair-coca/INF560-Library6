@@ -1,0 +1,139 @@
+<svg width="1280" height="400" viewBox="0 0 1280 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Nunito:wght@700;800&amp;display=swap');
+    </style>
+
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8F0"/>
+      <stop offset="100%" style="stop-color:#FFE8D0"/>
+    </linearGradient>
+
+    <!-- Card shadow filter -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#2D2D2D" flood-opacity="1"/>
+    </filter>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="8" flood-color="#2D2D2D" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Clip paths -->
+    <clipPath id="bannerClip">
+      <rect width="1280" height="400" rx="24"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="1280" height="400" rx="24" fill="url(#bgGrad)"/>
+
+  <!-- Decorative circles background -->
+  <circle cx="60" cy="60" r="120" fill="#FFD93D" opacity="0.18"/>
+  <circle cx="1220" cy="340" r="150" fill="#4ECDC4" opacity="0.18"/>
+  <circle cx="1100" cy="40" r="80" fill="#FF6B9D" opacity="0.12"/>
+  <circle cx="200" cy="370" r="90" fill="#A855F7" opacity="0.10"/>
+  <circle cx="640" cy="-30" r="100" fill="#6BCB77" opacity="0.10"/>
+
+  <!-- Dot grid pattern -->
+  <g opacity="0.06">
+    <circle cx="80" cy="80" r="3" fill="#2D2D2D"/>
+    <circle cx="120" cy="80" r="3" fill="#2D2D2D"/>
+    <circle cx="160" cy="80" r="3" fill="#2D2D2D"/>
+    <circle cx="80" cy="120" r="3" fill="#2D2D2D"/>
+    <circle cx="120" cy="120" r="3" fill="#2D2D2D"/>
+    <circle cx="160" cy="120" r="3" fill="#2D2D2D"/>
+    <circle cx="80" cy="160" r="3" fill="#2D2D2D"/>
+    <circle cx="120" cy="160" r="3" fill="#2D2D2D"/>
+    <circle cx="160" cy="160" r="3" fill="#2D2D2D"/>
+    <circle cx="1100" cy="240" r="3" fill="#2D2D2D"/>
+    <circle cx="1140" cy="240" r="3" fill="#2D2D2D"/>
+    <circle cx="1180" cy="240" r="3" fill="#2D2D2D"/>
+    <circle cx="1100" cy="280" r="3" fill="#2D2D2D"/>
+    <circle cx="1140" cy="280" r="3" fill="#2D2D2D"/>
+    <circle cx="1180" cy="280" r="3" fill="#2D2D2D"/>
+    <circle cx="1100" cy="320" r="3" fill="#2D2D2D"/>
+    <circle cx="1140" cy="320" r="3" fill="#2D2D2D"/>
+    <circle cx="1180" cy="320" r="3" fill="#2D2D2D"/>
+  </g>
+
+  <!-- ── LEFT SIDE: Book cards stack ── -->
+
+  <!-- Book card 3 (back) -->
+  <rect x="72" y="120" width="140" height="190" rx="14" fill="#A855F7" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)" transform="rotate(-8, 142, 215)"/>
+  <text x="142" y="225" text-anchor="middle" font-size="52" transform="rotate(-8, 142, 215)">🚀</text>
+
+  <!-- Book card 2 (middle) -->
+  <rect x="108" y="108" width="140" height="190" rx="14" fill="#4ECDC4" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)" transform="rotate(-3, 178, 203)"/>
+  <text x="178" y="213" text-anchor="middle" font-size="52" transform="rotate(-3, 178, 203)">📖</text>
+
+  <!-- Book card 1 (front) -->
+  <rect x="148" y="98" width="140" height="190" rx="14" fill="#FF6B9D" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)"/>
+  <text x="218" y="210" text-anchor="middle" font-size="56">📚</text>
+  <rect x="164" y="230" width="108" height="10" rx="5" fill="#2D2D2D" opacity="0.15"/>
+  <rect x="172" y="248" width="84" height="8" rx="4" fill="#2D2D2D" opacity="0.1"/>
+
+  <!-- ── CENTER: Main title block ── -->
+
+  <!-- Pill badge top -->
+  <rect x="460" y="72" width="360" height="40" rx="20" fill="#FFD93D" stroke="#2D2D2D" stroke-width="2.5" filter="url(#cardShadow)"/>
+  <text x="640" y="97" text-anchor="middle" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="800" font-size="15" fill="#2D2D2D" letter-spacing="2">🎓 PROYECTO LIBRARY APP · INF560</text>
+
+  <!-- Main title -->
+  <text x="640" y="178" text-anchor="middle" font-family="'Fredoka One', 'Arial Rounded MT Bold', sans-serif" font-size="88" fill="#2D2D2D" letter-spacing="-1">LibraryApp</text>
+
+  <!-- Subtitle -->
+  <text x="640" y="222" text-anchor="middle" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="700" font-size="18" fill="#FF6B35">Sistema de Gestión de Biblioteca</text>
+
+  <!-- ── TECH BADGES ROW ── -->
+  <!-- Laravel -->
+  <rect x="418" y="258" width="108" height="36" rx="18" fill="#FF6B35" stroke="#2D2D2D" stroke-width="2.5" filter="url(#cardShadow)"/>
+  <text x="472" y="281" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="white">⚡ Laravel 13</text>
+
+  <!-- Tailwind -->
+  <rect x="538" y="258" width="116" height="36" rx="18" fill="#4ECDC4" stroke="#2D2D2D" stroke-width="2.5" filter="url(#cardShadow)"/>
+  <text x="596" y="281" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="#2D2D2D">🎨 Tailwind CSS</text>
+
+  <!-- MySQL -->
+  <rect x="666" y="258" width="96" height="36" rx="18" fill="#6BCB77" stroke="#2D2D2D" stroke-width="2.5" filter="url(#cardShadow)"/>
+  <text x="714" y="281" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="#2D2D2D">🗄️ MySQL</text>
+
+  <!-- PHP -->
+  <rect x="774" y="258" width="88" height="36" rx="18" fill="#A855F7" stroke="#2D2D2D" stroke-width="2.5" filter="url(#cardShadow)"/>
+  <text x="818" y="281" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="white">🐘 PHP 8</text>
+
+  <!-- ── FEATURE CHIPS ── -->
+  <text x="640" y="340" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="700" font-size="13" fill="#2D2D2D" opacity="0.55" letter-spacing="1">CRUD · Validación · Soft Deletes · Many-to-Many · Form Requests</text>
+
+  <!-- Version tag -->
+  <rect x="560" y="356" width="160" height="30" rx="15" fill="#2D2D2D"/>
+  <text x="640" y="376" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="#FFD93D" letter-spacing="1">🏷 v0.5.0 · Lab 8</text>
+
+  <!-- ── RIGHT SIDE: Stat cards ── -->
+
+  <!-- Card: Libros -->
+  <rect x="964" y="90" width="130" height="90" rx="16" fill="#FFD93D" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)"/>
+  <text x="979" y="125" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="#2D2D2D" opacity="0.7">📚 Libros</text>
+  <text x="979" y="162" font-family="'Fredoka One', 'Arial Rounded MT Bold', sans-serif" font-size="36" fill="#2D2D2D">128</text>
+
+  <!-- Card: Autores -->
+  <rect x="1108" y="90" width="130" height="90" rx="16" fill="#FF6B9D" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)"/>
+  <text x="1123" y="125" font-family="'Nunito', sans-serif" font-weight="800" font-size="13" fill="#2D2D2D" opacity="0.7">👤 Autores</text>
+  <text x="1123" y="162" font-family="'Fredoka One', 'Arial Rounded MT Bold', sans-serif" font-size="36" fill="#2D2D2D">47</text>
+
+  <!-- Card: Prestamos -->
+  <rect x="964" y="200" width="130" height="90" rx="16" fill="#4ECDC4" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)"/>
+  <text x="979" y="234" font-family="'Nunito', sans-serif" font-weight="800" font-size="12" fill="#2D2D2D" opacity="0.7">📤 Préstamos</text>
+  <text x="979" y="271" font-family="'Fredoka One', 'Arial Rounded MT Bold', sans-serif" font-size="36" fill="#2D2D2D">34</text>
+
+  <!-- Card: Categorías -->
+  <rect x="1108" y="200" width="130" height="90" rx="16" fill="#6BCB77" stroke="#2D2D2D" stroke-width="3" filter="url(#cardShadow)"/>
+  <text x="1123" y="234" font-family="'Nunito', sans-serif" font-weight="800" font-size="12" fill="#2D2D2D" opacity="0.7">🏷️ Categorías</text>
+  <text x="1123" y="271" font-family="'Fredoka One', 'Arial Rounded MT Bold', sans-serif" font-size="36" fill="#2D2D2D">8</text>
+
+  <!-- Author credit bottom right -->
+  <text x="1255" y="385" text-anchor="end" font-family="'Nunito', sans-serif" font-weight="700" font-size="12" fill="#2D2D2D" opacity="0.4">abdair-coca</text>
+
+  <!-- Border around entire banner -->
+  <rect width="1280" height="400" rx="24" fill="none" stroke="#2D2D2D" stroke-width="3"/>
+</svg>
