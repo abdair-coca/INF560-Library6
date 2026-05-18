@@ -70,18 +70,10 @@ It focuses on:
 
 # 🖼️ Preview
 
-## 🏠 Dashboard
+## 🏠 Dashboard and Books List
 
 <p align="center">
   <img src="docs/screenshots/dashboard.png" alt="Dashboard" width="100%">
-</p>
-
----
-
-## 📚 Books List
-
-<p align="center">
-  <img src="docs/screenshots/books-index.png" alt="Books List" width="100%">
 </p>
 
 ---
