@@ -73,9 +73,19 @@
     </div>
     <div>
         <label class="block font-fredoka text-sm text-brand-purple mb-1.5">🌐 Idioma</label>
-        <input type="text" name="language"
-            value="{{ old('language', $book->language ?? 'Español') }}"
-            class="w-full border-[2.5px] border-brand-dark rounded-full px-4 py-2 font-nunito font-bold text-sm shadow-neo-sm focus:outline-none focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-neo transition-all">
+        <select name="language"
+            class="w-full border-[2.5px] @error('language') border-brand-pink bg-pink-50 @else border-brand-dark @enderror rounded-full px-4 py-2 font-nunito font-bold text-sm shadow-neo-sm focus:outline-none focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-neo transition-all">
+            <option value="">Selecciona un idioma...</option>
+            @php
+            $languages = ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Ruso', 'Chino', 'Japonés', 'Árabe'];
+            @endphp
+            @foreach($languages as $lang)
+            <option value="{{ $lang }}"
+                {{ old('language', $book->language ?? '') == $lang ? 'selected' : '' }}>
+                {{ $lang }}
+            </option>
+            @endforeach
+        </select>
     </div>
 </div>
 {{-- Campo: Categoría --}}
