@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Modern Library Management System</strong><br>
+  <strong>Full-Stack Library Management System</strong><br>
   Built with Laravel 13, PostgreSQL & TailwindCSS
 </p>
 
@@ -19,11 +19,12 @@
 </p>
 
 <p align="center">
+  <a href="#-overview">Overview</a> •
   <a href="#-features">Features</a> •
   <a href="#-preview">Preview</a> •
   <a href="#-tech-stack">Tech Stack</a> •
   <a href="#-installation">Installation</a> •
-  <a href="#-project-architecture">Architecture</a> •
+  <a href="#-architecture">Architecture</a> •
   <a href="#-roadmap">Roadmap</a>
 </p>
 
@@ -31,20 +32,16 @@
 
 # ✨ Overview
 
-**Library App** is a modern and colorful library management system designed for academic and real-world learning purposes.
+**Library App** is a production-ready library management system built on a clean, scalable Laravel architecture. It handles the full lifecycle of a library operation — from book cataloging and member management to loan tracking and access control.
 
-The project was developed incrementally through backend laboratory guides for the subject:
+The system was developed incrementally over multiple releases, applying industry-standard backend practices at each stage:
 
-> **INF560 — Backend Web Development**
+- **Scalable architecture** — RESTful controllers, Form Requests, and layered middleware
+- **Data integrity** — custom validation rules, soft deletes, and eager-loaded ORM queries
+- **Maintainability** — reusable Blade components, semantic commits, and Git version tagging
+- **Security** — role-based authentication and route-level middleware protection
 
-It focuses on:
-
-- scalable backend architecture
-- clean code practices
-- RESTful design
-- reusable UI components
-- maintainable Laravel structure
-- developer-friendly experience
+> Built for the course **INF560 — Backend Web Development** at Universidad Autónoma Tomás Frías.
 
 ---
 
@@ -54,15 +51,15 @@ It focuses on:
 
 | Feature | Description |
 |---|---|
-| 📖 Books Management | Complete CRUD for books |
-| ✍️ Authors | Many-to-many relationships |
-| 🏷️ Categories | Book classification system |
-| 👤 Members | User/member administration |
-| 🔁 Loans | Loan and availability logic |
-| 🔐 Authentication | Login, roles & middleware |
-| 🗑️ Soft Deletes | Safe record deletion |
-| ✅ Validations | Form Requests & custom rules |
-| ⚡ Optimized Queries | Eager loading & clean ORM usage |
+| 📖 Book Management | Full CRUD with ISBN and slug validation |
+| ✍️ Authors | Many-to-many relationships with sync support |
+| 🏷️ Categories | Flexible book classification system |
+| 👤 Members | User and member administration panel |
+| 🔁 Loans | Loan tracking with availability logic |
+| 🔐 Authentication | Login, role-based access, and middleware guards |
+| 🗑️ Soft Deletes | Safe record archiving with restore support |
+| ✅ Validations | Form Requests with custom rules (ValidIsbn, ValidSlug) |
+| ⚡ Query Optimization | Eager loading and clean Eloquent ORM usage |
 
 </div>
 
@@ -70,7 +67,7 @@ It focuses on:
 
 # 🖼️ Preview
 
-## 🏠 Dashboard and Books List
+## 🏠 Dashboard
 
 <p align="center">
   <img src="docs/screenshots/dashboard.png" alt="Dashboard" width="100%">
@@ -118,73 +115,64 @@ It focuses on:
 
 ---
 
-# 🧠 Academic Context
-
-| Field | Information |
-|---|---|
-| 📘 Subject | INF560 — Backend Web Development |
-| 🏫 University | Universidad Autónoma Tomás Frías (UATF) |
-| 📍 Location | Potosí, Bolivia |
-| 👨‍🏫 Professor | M. Sc. Huáscar Fedor Gonzales Guzmán |
-| 🧑‍🎓 Student | Univ. Abdair Magdiel Coca Carlo |
-
----
-
 # 🧱 Tech Stack
 
 ## ⚙️ Backend
 
-- Laravel 13
-- PHP 8.3+
-- Eloquent ORM
-- Form Requests
-- RESTful Controllers
-- Middleware & Authentication
+- **Laravel 13** — application framework
+- **PHP 8.3+** — runtime with modern syntax
+- **Eloquent ORM** — expressive database layer
+- **Form Requests** — decoupled validation logic
+- **RESTful Controllers** — clean resource routing
+- **Middleware & Roles** — route-level access control
 
 ---
 
 ## 🗄️ Database
 
-- PostgreSQL 14+
-- Laravel Migrations
-- Seeders & Factories
+- **PostgreSQL 14+** — primary relational database
+- **Laravel Migrations** — version-controlled schema
+- **Seeders & Factories** — reproducible test data
 
 ---
 
 ## 🎨 Frontend
 
-- Blade Templates
-- TailwindCSS
-- Reusable Components
-- Responsive Design
+- **Blade Templates** — server-side rendering
+- **TailwindCSS** — utility-first styling
+- **Reusable Components** — DRY, composable UI
+- **Responsive Design** — mobile-friendly layouts
 
 ---
 
 # 🎨 Design System
 
-The project follows a visual identity inspired by:
+The UI follows a neo-brutalist aesthetic — vibrant, high-contrast, and deliberately expressive.
 
-- 🎨 Neo-brutalist UI
-- ✨ Friendly UX
-- 🌈 Vibrant colors
-- 🧩 Rounded components
-- 📦 Strong shadows & borders
+### Visual Identity
+
+- 🎨 Bold borders and strong shadows
+- 🌈 Saturated color palette with intentional accents
+- 🧩 Rounded components with clear visual hierarchy
+- ✨ Friendly UX with consistent interaction patterns
 
 ### Typography
 
-- Fredoka One
-- Nunito
+| Role | Font |
+|---|---|
+| Display | Fredoka One |
+| Body | Nunito |
 
 ### Brand Palette
 
-| Color | Usage |
+| Color | Role |
 |---|---|
-| 🟡 Yellow | Highlights |
-| 🟠 Orange | Actions |
-| 🌸 Pink | Accent |
-| 🔵 Blue | Primary |
-| 🟣 Purple | Branding |
-| 🟢 Green | Success |
+| 🟡 Yellow | Highlights & attention |
+| 🟠 Orange | Primary actions |
+| 🌸 Pink | Accent & branding |
+| 🔵 Blue | Information & links |
+| 🟣 Purple | Identity & headers |
+| 🟢 Green | Success states |
 
 ---
 
@@ -202,16 +190,16 @@ The project follows a visual identity inspired by:
 
 ## 🚀 Quick Setup
 
-### 1️⃣ Clone Repository
+### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/HuascarFedor/INF560_libraryApp.git
-cd INF560_libraryApp
+git clone https://github.com/abdair-coca/Library_App.git
+cd Library-App
 ```
 
 ---
 
-### 2️⃣ Environment Variables
+### 2️⃣ Set Up Environment
 
 ```bash
 cp .env.example .env
@@ -219,7 +207,7 @@ cp .env.example .env
 
 ---
 
-### 3️⃣ Install Dependencies
+### 3️⃣ Install PHP Dependencies
 
 ```bash
 composer install
@@ -237,13 +225,13 @@ php artisan key:generate
 
 ### 5️⃣ Configure PostgreSQL
 
-Create database:
+Create the database:
 
 ```sql
 CREATE DATABASE library_db;
 ```
 
-Example `.env`:
+Update your `.env`:
 
 ```env
 DB_CONNECTION=pgsql
@@ -256,7 +244,7 @@ DB_PASSWORD=your_password
 
 ---
 
-### 6️⃣ Run Migrations & Seeders
+### 6️⃣ Run Migrations and Seeders
 
 ```bash
 php artisan migrate --seed
@@ -264,7 +252,7 @@ php artisan migrate --seed
 
 ---
 
-### 7️⃣ Frontend Assets
+### 7️⃣ Build Frontend Assets
 
 ```bash
 npm install
@@ -273,7 +261,7 @@ npm run dev
 
 ---
 
-### 8️⃣ Start Development Server
+### 8️⃣ Start the Development Server
 
 ```bash
 php artisan serve
@@ -281,7 +269,7 @@ php artisan serve
 
 Application available at:
 
-```txt
+```
 http://localhost:8000
 ```
 
@@ -295,16 +283,12 @@ http://localhost:8000
 php artisan route:list
 ```
 
----
-
 ## 🗄️ Database
 
 ```bash
 php artisan migrate
 php artisan migrate:refresh --seed
 ```
-
----
 
 ## ⚡ Cache
 
@@ -313,17 +297,14 @@ php artisan cache:clear
 php artisan config:clear
 ```
 
----
-
-## 🏗️ Generators
+## 🏗️ Code Generation
 
 ```bash
 php artisan make:model Book -m
 php artisan make:controller BookController --resource
+php artisan make:request StoreBookRequest
 php artisan make:seeder BookSeeder
 ```
-
----
 
 ## 🧪 REPL
 
@@ -333,62 +314,66 @@ php artisan tinker
 
 ---
 
-# 🧩 Project Architecture
+# 🧩 Architecture
 
-```txt
+```
 app/
 ├── Http/
-│   ├── Controllers/
-│   ├── Requests/
-│   └── Middleware/
+│   ├── Controllers/       # RESTful resource controllers
+│   ├── Requests/          # Form Request validation classes
+│   └── Middleware/        # Auth and role guards
 │
-├── Models/
+├── Models/                # Eloquent models with relationships
+│
+├── Rules/                 # Custom validation rules (ValidIsbn, ValidSlug)
 │
 resources/
 ├── views/
 │   ├── books/
 │   ├── authors/
 │   ├── categories/
-│   └── components/
+│   ├── members/
+│   ├── loans/
+│   └── components/        # Reusable Blade components
 │
 database/
-├── migrations/
-├── seeders/
-└── factories/
+├── migrations/            # Version-controlled schema
+├── seeders/               # Demo and test data
+└── factories/             # Model factories for testing
 ```
 
 ---
 
-# 📚 Academic Roadmap
+# 📚 Release History
 
-| Guide | Version | Main Focus |
+| Version | Guide | Focus |
 |---|---|---|
-| Guide 4 | v0.1.0 | Laravel setup + PostgreSQL |
-| Guide 5 | v0.2.0 | Models & Eloquent relationships |
-| Guide 6 | v0.3.0 | REST Controllers & Blade |
-| Guide 7 | v0.4.0 | Full CRUD + Soft Delete |
-| Guide 8 | v0.5.0 | Advanced validation |
-| Guide 9 | v0.6.0 | Authentication & Roles |
+| v0.1.0 | Guide 4 | Laravel setup + PostgreSQL integration |
+| v0.2.0 | Guide 5 | Eloquent models and relationships |
+| v0.3.0 | Guide 6 | RESTful controllers and Blade views |
+| v0.4.0 | Guide 7 | Full CRUD, soft deletes, Blade partials |
+| v0.5.0 | Guide 8 | Form Requests and custom validation rules |
+| v0.6.0 | Guide 9 | Authentication, roles, and middleware |
 
 ---
 
-# ✅ Best Practices Applied
+# ✅ Engineering Practices
 
-- RESTful conventions
-- Clean architecture
-- Separation of responsibilities
-- Reusable Blade components
-- Eager loading optimization
-- Form Request validation
-- Flash messages & error handling
-- Semantic commit structure
-- Git versioning with tags
+- RESTful conventions and resource routing
+- Clean architecture with separation of concerns
+- Decoupled validation via Form Request classes
+- Custom validation rules (`ValidIsbn`, `ValidSlug`)
+- Reusable Blade components for DRY templates
+- Eager loading to prevent N+1 query problems
+- Flash messages and structured error handling
+- Semantic commit messages
+- Git version tagging at each milestone
 
 ---
 
 # 🧪 Testing
 
-Run Laravel tests:
+Run the full test suite:
 
 ```bash
 php artisan test
@@ -402,16 +387,15 @@ vendor/bin/phpunit
 
 ---
 
-# 📂 Suggested README Assets Structure
+# 📂 Documentation Assets
 
-```txt
+```
 docs/
 ├── assets/
-│   └── library-banner.png
+│   └── library-banner.svg
 │
 └── screenshots/
     ├── dashboard.png
-    ├── books-index.png
     ├── book-show.png
     ├── book-form.png
     ├── authors-index.png
@@ -423,50 +407,39 @@ docs/
 
 # 🤝 Contributing
 
-Contributions are welcome.
-
-## Workflow
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
 ```bash
-# Fork repository
+# Fork the repository
 
-# Create feature branch
-git checkout -b feature/my-feature
+# Create a feature branch
+git checkout -b feature/your-feature-name
 
-# Commit changes
-git commit -m "feat: add new feature"
+# Commit your changes
+git commit -m "feat: add your feature description"
 
-# Push branch
-git push origin feature/my-feature
+# Push and open a Pull Request
+git push origin feature/your-feature-name
 ```
-
-Then open a Pull Request 🚀
 
 ---
 
 # 📄 License
 
-This project is licensed under the MIT License.
-
-If the project is used only for academic purposes, you can modify this section accordingly.
+This project is licensed under the **MIT License** — see [`LICENSE`](LICENSE) for details.
 
 ---
 
 # 👨‍💻 Author
 
-Developed for the subject:
+**Abdair Magdiel Coca Carlo**
 
-> **INF560 — Backend Web Development**
-> **Developed by Abdair Coca**
-
-Focused on:
-- backend best practices
-- scalable Laravel architecture
-- modern UI experience
-- educational software engineering
+- GitHub: [@abdair-coca](https://github.com/abdair-coca)
+- Course: INF560 — Backend Web Development
+- Institution: Universidad Autónoma Tomás Frías (UATF), Potosí, Bolivia
 
 ---
 
 <p align="center">
-  <strong>Built with Laravel ❤️ + colorful design 📚✨</strong>
+  <strong>Built with Laravel ❤️ — clean architecture, vibrant design 📚✨</strong>
 </p>
